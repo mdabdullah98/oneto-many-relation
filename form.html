@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: rgb(45, 47, 47);
+            }
+
+            form {
+                margin-top: 2rem;
+                padding: 1rem;
+            }
+
+            label {
+                font-family: "Courier New", Courier, monospace;
+                color: white;
+            }
+
+            input {
+                margin: 0.5rem 0;
+                width: 50%;
+                height: 2rem;
+                outline: none;
+                border: 1px solid rgb(71, 128, 126);
+                border-radius: 0.2rem;
+            }
+
+            button[type="submit"] {
+                padding: 0.5rem 1rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Add Product</h1>
+        <form action="/admin/add-products" method="POST">
+            <div>
+                <label htmlFor="title">Add Title </label> <br />
+                <input id="title" type="text" name="title" placeholder="product title" />
+            </div>
+            <div>
+                <label htmlFor="brand">Brand Name </label> <br />
+                <input type="text" name="brand" id="brand" placeholder=" type smarthone brand name" autoFocus />
+            </div>
+            <div>
+                <label htmlFor="model">Model</label> <br />
+                <input type="text" name="model" id="model" placeholder=" type smarthone model number" />
+            </div>
+            <div>
+                <label htmlFor="price">Price</label> <br />
+                <input type="text" name="price" placeholder="price" id="price" />
+            </div>
+
+            <div>
+                <label htmlFor="catagory">catagory</label> <br />
+                <input type="text" name="catagory" placeholder="catagory" id="catagory" />
+            </div>
+
+            <div>
+                <label htmlFor="stock">Stock</label> <br />
+                <input type="text" name="stock" id="stock" placeholder="stock" />
+            </div>
+
+            <div>
+                <label htmlFor="description">description</label>
+                <br />
+                <input type="text" name="description" id="description" placeholder="product description" />
+            </div>
+            <div>
+                <label htmlFor="discountPercentage">Discount</label>
+                <br />
+                <input type="text" name="discountPercentage" id="discountPercentage" placeholder="product discount " />
+            </div>
+
+            <div>
+                <label htmlFor="thumbnail">Thumbnail</label>
+                <br />
+                <input type="text" name="thumbnail" id="thumbnail" placeholder="product thumbnail " />
+            </div>
+            <button type="submit">send</button>
+        </form>
+
+    </body>
+
+</html>
