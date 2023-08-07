@@ -1,11 +1,15 @@
 const express = require("express");
+const cookie = require("cookie-parser");
 
 const adminRouter = require("./routes/admin");
 const shopRouter = require("./routes/shop");
+const cookieParser = require("cookie-parser");
 
 const port = process.env.Port || 8080;
 const server = express();
 
+//cookie parser
+server.use(cookieParser());
 //middle ware
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
