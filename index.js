@@ -8,7 +8,8 @@ const cookieParser = require("cookie-parser");
 const port = process.env.Port || 8080;
 const server = express();
 
-//cookie parser
+//cookie parser over here
+
 server.use(cookieParser());
 //middle ware
 server.use(express.json());
