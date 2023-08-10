@@ -4,42 +4,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <style>
-            body {
-                margin: 0;
-                padding: 0;
-                background: rgb(45, 47, 47);
-            }
-
-            form {
-                margin-top: 2rem;
-                padding: 1rem;
-            }
-
-            label {
-                font-family: "Courier New", Courier, monospace;
-                color: white;
-            }
-
-            input {
-                margin: 0.5rem 0;
-                width: 50%;
-                height: 2rem;
-                outline: none;
-                border: 1px solid rgb(71, 128, 126);
-                border-radius: 0.2rem;
-            }
-
-            button[type="submit"] {
-                padding: 0.5rem 1rem;
-            }
-        </style>
+        <title>Add Product Form</title>
+        <link rel="stylesheet" href="/Css/main.css">
     </head>
 
     <body>
+        <div class="main-div">
+            <li class="chat"><a href="/">home</a></li>
+            <li class="addProduct"><a href="/admin">add product</a></li>
+            <li class="chat"><a href="/admin/messageForm">chat here</a></li>
+            <li class=""><a href="/admin/contact_us">contact US</a></li>
+
+        </div>
+
         <h1>Add Product</h1>
-        <form action="/admin/add-products" method="POST">
+        <form action="/admin/add-products" method="POST" class="form">
             <div>
                 <label htmlFor="title">Add Title </label> <br />
                 <input id="title" type="text" name="title" placeholder="product title" />
