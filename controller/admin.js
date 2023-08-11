@@ -5,7 +5,7 @@ const Product = require("../model/product");
 
 exports.addProductForm = (req, res) => {
   const product = Product.fetchAll();
-  console.log(JSON.parse(product));
+
   res.sendFile(path.resolve(__dirname, "..", "views", "form.html"));
 };
 exports.AddproductData = (req, res) => {
