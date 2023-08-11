@@ -1,11 +1,27 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const Product = require("../model/product");
+
 exports.addProductForm = (req, res) => {
+  const product = Product.fetchAll();
+  console.log(JSON.parse(product));
   res.sendFile(path.resolve(__dirname, "..", "views", "form.html"));
 };
-exports.showAddProductsData = (req, res) => {
-  console.log(req.body);
+exports.AddproductData = (req, res) => {
+  const reqbody = req.body;
+  const product = new Product(
+    reqbody.title,
+    reqbody.stock,
+    reqbody.price,
+    reqbody.thumbnail,
+    reqbody.brand,
+    reqbody.model,
+    reqbody.catagory,
+    reqbody.description,
+    reqbody.discountPercentage
+  );
+  product.save();
   res.redirect(301, "/admin");
 };
 

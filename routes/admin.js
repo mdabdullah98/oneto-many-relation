@@ -6,7 +6,7 @@ const adminController = require("../controller/admin");
 
 adminRouter
   .get("/", adminController.addProductForm)
-  .post("/add-products", adminController.showAddProductsData)
+  .post("/add-products", adminController.AddproductData)
   .post("/username", adminController.storeUsernameInCookie)
   .post("/message", adminController.appendfileTxt)
   .get("/messageForm", adminController.showUserChat)
