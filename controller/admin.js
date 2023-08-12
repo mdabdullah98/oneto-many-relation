@@ -4,9 +4,21 @@ const fs = require("fs");
 const Product = require("../model/product");
 
 exports.addProductForm = (req, res) => {
-  const product = Product.fetchAll();
+  console.log("start");
+  Product.fetchAll()
+    .then(([data]) => {
+      console.log("inside res start");
 
-  res.sendFile(path.resolve(__dirname, "..", "views", "form.html"));
+      res.json(data);
+      console.log(data);
+      console.log("inside res end");
+    })
+    .catch((err) => {
+      throw Error(err);
+    });
+
+  // res.sendFile(path.resolve(__dirname, "..", "views", "form.html"));
+  console.log("end");
 };
 exports.AddproductData = (req, res) => {
   const reqbody = req.body;

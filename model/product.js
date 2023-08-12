@@ -1,6 +1,4 @@
-const fs = require("fs");
-
-const path = require("path");
+const db = require("../utils/database");
 
 module.exports = class Product {
   constructor(
@@ -25,29 +23,12 @@ module.exports = class Product {
     this.thumbnail = thumbnail;
   }
 
-  readFile(path) {}
-  save() {
-    const jsonPath = path.resolve(__dirname, "..", "data.json");
-    fs.readFile(jsonPath, (err, data) => {
-      let products = [];
-      if (!err) {
-        products = JSON.parse(data);
-      }
-      products.push(this);
-      fs.writeFile(jsonPath, JSON.stringify(products), (err) => {
-        if (err) throw Error(err);
-      });
-    });
-  }
+  save() {}
 
-  cb() {}
+  static deleteById() {}
 
   static fetchAll() {
-    const jsonPath = path.resolve(__dirname, "..", "data.json");
-    const data = fs.readFileSync(jsonPath, "utf-8", (err, data) => {
-      if (err) return [];
-      return data;
-    });
-    return data;
+    return db.execute("SELECT * FROM products");
   }
+  static findById() {}
 };
