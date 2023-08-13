@@ -5,13 +5,16 @@ const adminRouter = express.Router();
 const adminController = require("../controller/admin");
 
 adminRouter
-  .get("/", adminController.addProductForm)
   .post("/add-products", adminController.AddproductData)
   .post("/username", adminController.storeUsernameInCookie)
   .post("/message", adminController.appendfileTxt)
+  .post("/contactData", adminController.getContactBodyData)
+  .get("/", adminController.getAllData)
+  .get("/products/:id", adminController.getSingleProduct)
+  .get("/addData", adminController.displayForm)
+  .get("/success", adminController.showSucessMessage)
   .get("/messageForm", adminController.showUserChat)
   .get("/contact_us", adminController.contactUs)
-  .post("/contactData", adminController.getContactBodyData)
-  .get("/success", adminController.showSucessMessage);
+  .delete("/products/:id", adminController.deleteProduct);
 
 module.exports = adminRouter;

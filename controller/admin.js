@@ -1,40 +1,37 @@
 const express = require("express");
 const path = require("path");
+
 const fs = require("fs");
 const Product = require("../model/product");
 
-exports.addProductForm = (req, res) => {
-  console.log("start");
+exports.getAllData = (req, res) => {
   Product.fetchAll()
     .then(([data]) => {
-      console.log("inside res start");
-
       res.json(data);
-      console.log(data);
-      console.log("inside res end");
     })
-    .catch((err) => {
-      throw Error(err);
-    });
-
-  // res.sendFile(path.resolve(__dirname, "..", "views", "form.html"));
-  console.log("end");
+    .catch((err) => console.log(err));
+  // res.end();
+  console.log("data fetched");
 };
+exports.displayForm = (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "views", "form.html"));
+};
+
 exports.AddproductData = (req, res) => {
   const reqbody = req.body;
   const product = new Product(
     reqbody.title,
-    reqbody.stock,
-    reqbody.price,
-    reqbody.thumbnail,
-    reqbody.brand,
-    reqbody.model,
-    reqbody.catagory,
+    +reqbody.price,
     reqbody.description,
-    reqbody.discountPercentage
+    reqbody.thumbnail
   );
-  product.save();
-  res.redirect(301, "/admin");
+
+  product
+    .save()
+    .then((data) => {
+      res.redirect(301, "/admin");
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.storeUsernameInCookie = (req, res) => {
@@ -68,4 +65,20 @@ exports.getContactBodyData = (req, res) => {
 };
 exports.showSucessMessage = (req, res) => {
   res.send("form submitted succesfully");
+};
+
+//get single product by id
+exports.getSingleProduct = (req, res) => {
+  Product.getsingleProduct(req.params.id)
+    .then(([data]) => {
+      res.json(data);
+    })
+    .catch((err) => console.log(err));
+};
+exports.deleteProduct = (req, res) => {
+  Product.deleteById(req.params.id)
+    .then((del) => {
+      res.redirect("/");
+    })
+    .catch((err) => console.log(err));
 };
