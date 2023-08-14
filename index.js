@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const sequelize = require("./utils/database");
 const port = process.env.Port || 8080;
 const cookieParser = require("cookie-parser");
 const server = express();
@@ -24,8 +25,13 @@ server.use("*", (req, res, next) => {
   res.status(404).sendFile(path.resolve(__dirname, "views", "404.html"));
 });
 
+// sequelize is running
+sequelize
+  .sync()
+  .then((res) =>
+    server.listen(port, () => {
+      console.log(`server is running on port http://localhost:${port}`);
+    })
+  )
+  .catch((err) => console.log(err));
 //server is running
-
-server.listen(port, () => {
-  console.log(`server is running on port http://localhost:${port}`);
-});
