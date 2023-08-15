@@ -10,11 +10,12 @@ adminRouter
   .post("/message", adminController.appendfileTxt)
   .post("/contactData", adminController.getContactBodyData)
   .get("/", adminController.getAllData)
-  .get("/products/:id", adminController.getSingleProduct)
+  .get("/product/:id", adminController.getSingleProduct)
   .get("/addData", adminController.displayForm)
   .get("/success", adminController.showSucessMessage)
   .get("/messageForm", adminController.showUserChat)
   .get("/contact_us", adminController.contactUs)
+  .patch("/product/:id", adminController.updateProduct)
   .delete("/products/:id", adminController.deleteProduct);
 
 module.exports = adminRouter;

@@ -12,7 +12,7 @@ const Product = sequelize.define("products", {
     type: Sequelize.DOUBLE,
     allowNull: false,
   },
-  tile: Sequelize.STRING,
+  title: Sequelize.STRING,
   description: Sequelize.TEXT,
   imageUrl: Sequelize.STRING,
 });

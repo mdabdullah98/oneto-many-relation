@@ -65,18 +65,34 @@ exports.showSucessMessage = (req, res) => {
 
 //get single product by id
 exports.getSingleProduct = (req, res) => {
-  // Product.getsingleProduct(req.params.id)
-  //   .then(([data]) => {
-  //     res.json(data);
-  //   })
-  //   .catch((err) => console.log(err));
-  res.end();
+  const params_id = +req.params.id;
+  Product.findOne({ where: { id: params_id } })
+    .then((data) => res.json(data))
+    .catch((err) => console.log(err));
 };
 exports.deleteProduct = (req, res) => {
-  // Product.deleteById(req.params.id)
-  //   .then((del) => {
-  //     res.redirect("/");
-  //   })
-  //   .catch((err) => console.log(err));
-  res.end();
+  Product.findByPk(req.params.id)
+    .then((product) => {
+      return product.destroy();
+    })
+    .then((deleetedData) => {
+      res.json(deleetedData);
+    })
+    .catch((err) => console.log(err));
+};
+exports.updateProduct = (req, res) => {
+  const reqbody = req.body;
+  Product.findByPk(reqbody.id)
+    .then((product) => {
+      product.title = reqbody.title;
+      product.price = reqbody.price;
+      product.description = reqbody.description;
+      product.imageUrl = reqbody.imageUrl;
+      return product.save();
+    })
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    })
+    .catch((err) => console.log(err));
 };
