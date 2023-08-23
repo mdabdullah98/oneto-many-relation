@@ -17,12 +17,13 @@ exports.displayForm = (req, res) => {
 
 exports.AddproductData = (req, res) => {
   const reqbody = req.body;
-  Product.create({
-    title: reqbody.title,
-    price: reqbody.price,
-    description: reqbody.description,
-    imageUrl: reqbody.thumbnail,
-  })
+  req.user
+    .createProduct({
+      title: reqbody.title,
+      price: reqbody.price,
+      description: reqbody.description,
+      imageUrl: reqbody.thumbnail,
+    })
     .then((result) => {
       console.log(result);
       res.redirect(301, "/admin/addData");

@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const sequelize = require("./utils/database");
+const Product = require("./model/product");
+const User = require("./model/user");
 const port = process.env.Port || 8080;
 const cookieParser = require("cookie-parser");
 const server = express();
@@ -18,20 +20,43 @@ server.use(cors());
 //middle ware
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.use(express.static(path.resolve(__dirname, "dist")));
+// server.use(express.static("dist"));
+
+server.use((req, res, next) => {
+  User.findByPk(1)
+    .then((user) => {
+      req.user = user;
+      console.log("middle ware", req.user);
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 server.use("/admin", adminRouter);
 server.use("/", shopRouter);
 server.use("*", (req, res, next) => {
   res.status(404).sendFile(path.resolve(__dirname, "views", "404.html"));
 });
 
+Product.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+User.hasMany(Product);
 // sequelize is running
 sequelize
   .sync()
-  .then((res) =>
-    server.listen(port, () => {
-      console.log(`server is running on port http://localhost:${port}`);
-    })
-  )
+  .then((res) => {
+    return User.findByPk(1);
+  })
+  .then((user) => {
+    if (!user) {
+      return User.create({ name: "rahul", email: "test@gmail.com" });
+    }
+    return user;
+  })
+  .then((user) => {})
   .catch((err) => console.log(err));
-//server is running
+
+server.listen(port, () => {
+  console.log(`server is running on port http://localhost:${port}`);
+});
