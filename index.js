@@ -26,7 +26,6 @@ server.use((req, res, next) => {
   User.findByPk(1)
     .then((user) => {
       req.user = user;
-      console.log("middle ware", req.user);
       next();
     })
     .catch((err) => {

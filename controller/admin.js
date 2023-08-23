@@ -5,12 +5,14 @@ const fs = require("fs");
 const Product = require("../model/product");
 
 exports.getAllData = (req, res) => {
-  Product.findAll()
+  req.user
+    .getProducts()
     .then((data) => {
       res.json(data);
     })
     .catch((err) => console.log(err));
 };
+
 exports.displayForm = (req, res) => {
   res.sendFile(path.resolve(__dirname, "..", "views", "form.html"));
 };
@@ -67,7 +69,8 @@ exports.showSucessMessage = (req, res) => {
 //get single product by id
 exports.getSingleProduct = (req, res) => {
   const params_id = +req.params.id;
-  Product.findOne({ where: { id: params_id } })
+  req.user
+    .getProducts({ where: { id: params_id } })
     .then((data) => res.json(data))
     .catch((err) => console.log(err));
 };
